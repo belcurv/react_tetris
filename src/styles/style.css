@@ -1,0 +1,13 @@
+html, body, div {
+  margin: 0;
+  padding: 0;
+}
+
+.square {
+  box-sizing: border-box;
+  background-color: aquamarine;
+  border: 1px solid teal;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+}
