@@ -11,8 +11,8 @@ export default class Point {
     return new Point(this.row - 1 + offset.row, this.col - 1 + offset.col);
   }
 
-  fallOne() {
-    return new Point(this.row + 1, this.col);
+  sameAs(p2) {
+    return this.row === p2.row && this.col === p2.col;
   }
 
 }
