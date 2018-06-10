@@ -1,20 +1,20 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-
-import * as Components from './components/components';
-import * as Model from './models/models';
+import { GameView } from './components/components';
+import configureStore from './store/configureStore';
 
 import './styles/style.css';
 
-const data = [
-  new Model.O(1, 1),
-  new Model.I(1, 4)
-];
+const appRoot = document.getElementById('app');
+const store = configureStore();
 
+store.subscribe(() => {
+  const state = store.getState();
+  console.log(state);
+  ReactDOM.render(
+    <GameView game={ state } />,
+    appRoot
+  );
+});
 
-ReactDOM.render(
-  <div>
-    { data.map((c, i) => <Components.ShapeView key={ i } shape={ c } />)}
-  </div>,
-  document.getElementById('app')
-);
+setInterval(() => store.dispatch({ type: 'TICK' }), 1000);
