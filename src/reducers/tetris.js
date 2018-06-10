@@ -1,6 +1,6 @@
 /* ================================= SETUP ================================= */
 
-import * as Model from '../model/models';
+import * as Model from '../model';
 const defaultState = new Model.Game();
 
 
