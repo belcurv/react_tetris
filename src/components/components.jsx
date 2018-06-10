@@ -9,6 +9,7 @@ let count = 0;
 
 /**
  * Component responsible for rendering a single point.
+ * Props `col` and `row` are integers, and are converted to px dimensions.
 */
 const Square = ({col, row}) => (
   <div className='square' style={{
@@ -23,19 +24,6 @@ Square.propTypes = {
   row: PropTypes.number,
 };
 
-export const ShapeView = ({ shape }) => (
-  <div>
-    {
-      shape.squares().map(({ row, col }, indx) => (
-        <Square key={ indx } row={ row } col={ col } />
-      ))
-    }
-  </div>
-);
-
-ShapeView.propTypes = {
-  shape: PropTypes.object
-};
 
 /**
  * The game is rendered as a div with 25 pixels for each row and column.
