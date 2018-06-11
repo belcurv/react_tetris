@@ -1,5 +1,5 @@
 /**
- * WTF is the author doing.
+ * WTF is the author doing?
  * 
  * State should look like this:
  * cols: 10
