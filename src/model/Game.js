@@ -36,6 +36,14 @@ export default class Game {
     return this;
   }
 
+  /**
+   * finds all the rows for which every column contains rubble.
+  */
+  completedRows() {
+    const rows = [...Array(this.rows)].map((e, i) => i + 1);
+    console.log(rows);
+  }
+
   convertToRubble() {
     this.rubble = this.rubble.concat(this.fallingPiece.points());
     this.startAPiece();
