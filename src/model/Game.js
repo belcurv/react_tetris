@@ -36,11 +36,16 @@ export default class Game {
   }
 
   /**
-   * finds all the rows for which every column contains rubble.
+   * returns array of rows (Integer) for which every column contains rubble.
   */
   completedRows() {
     const rows = [...Array(this.rows)].map((e, i) => i + 1);
-    console.log(rows);
+    const cols = [...Array(this.cols)].map((e, i) => i + 1);
+    return rows.filter(row => cols.every(col => this.hasRubble(row, col)));
+  }
+
+  hasRubble(row, col) {
+    return this.rubble.some(point => point.row === row && point.col === col);
   }
 
   convertToRubble() {
