@@ -30,7 +30,6 @@ export default class Game {
     }
     let nextPos = this.fallingPiece.points().map(p => new Point(p.row + 1, p.col));
     if (nextPos.some(p => this.rubble.some(r => r.sameAs(p)))) {
-      console.log('I should convert to rubble');
       this.convertToRubble();
     }
     return this;
