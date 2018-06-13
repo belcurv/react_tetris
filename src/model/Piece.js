@@ -45,7 +45,7 @@ export default class Piece {
 
   unRotate() {
     let currentRotIndex = Piece.rotations().indexOf(this.rotation);
-    this.rotation = Piece.rotations()[(currentRotIndex - 1) % 4];
+    this.rotation = Piece.rotations()[(currentRotIndex - 1 + 4) % 4];
   }
 
   fallOne() {
