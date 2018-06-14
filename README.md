@@ -1,9 +1,8 @@
 # react_tetris
-Tetris clone using react (hopefully)
 
-The basic application flow:
+Adapted from: https://withouttheloop.com/articles/2015-12-22-tetris1/
 
-### Model
+### High-Level Event Loop
 
 A new `redux` store is initialized on page load:
 
@@ -31,7 +30,62 @@ A root-level `setInterval()` dispatches a `TICK` action every 500ms. This advanc
 * `tick()` attempts to "fall" the current tetromino piece by one square and
 * converts it to `rubble` if certain conditions are met.
 
+### Model
 
+Game class method `.startAPiece()` calls `new Piece(shapes.selectRandom());`
+
+`shapes` is an object consisting of five properties (one for each shape: `O`, `I`, `T`, `L`, `Z`) plus a method, `.selectRandom()` to pick one of those shapes at random.
+
+Each of `shape`'s properties instantiates a new `Shape`, passing the shape's name and an anonymous "rotator" function to the `Shape` constructor. The purpose of the rotator function is to return an array of `Point` objects based on a passed cardinal direction (N, S, E, W). For example, the `I` property looks like this:
+
+```js
+I: new Shape('I', (rotation) => {
+    switch (rotation) {
+      case 'N':
+        return [new Point(1,1), new Point(2,1), new Point(3,1), new Point(4,1)];
+      case 'S':
+        return [new Point(1,1), new Point(2,1), new Point(3,1), new Point(4,1)];
+      case 'E':
+        return [new Point(2,1), new Point(2,2), new Point(2,3), new Point(2,4)];
+      case 'W':
+        return [new Point(2,1), new Point(2,2), new Point(2,3), new Point(2,4)];
+    }
+}),
+```
+
+Each instance of the `Point` class has two properties - `name` (`O`, `I`, `T`, `L`, or `Z`) and `rotator` (the anonymous function from above), plus a method `.pointsRotated(rotation)` that calls the `rotator` function with one of the four cardinal directions, returning the correct array of points to render.
+
+```js
+export default class Shape {
+  constructor(name, rotator) {
+    this.name    = name;
+    this.rotator = rotator;
+  }
+
+  pointsRotated(rotation) {
+    return this.rotator(rotation);
+  }
+}
+```
+
+Instances of the `Piece` class are created with properties `shape`, `offset` (defaulting to `Point(1, 5)` aka first row, middle column), and `rotation` (defaulting to 'N').  The class method `.points()` generates an array of rotated points and positions the piece by applying `this.offset` to each point in the piece's array of points.
+
+```js
+export default class Piece {
+  constructor(shape, offset = new Point(1, 5)) {
+    this.shape = shape;
+    this.offset = offset;
+    this.rotation = 'N';
+  }
+
+  // returns the points that need to be drawn for the piece
+  points() {
+    return this.shape.pointsRotated(this.rotation)
+      .map((point) => point.addOffset(this.offset));
+  }
+  ...
+}
+```
 
 ### Components
 
