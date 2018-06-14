@@ -53,7 +53,7 @@ I: new Shape('I', (rotation) => {
 }),
 ```
 
-Each instance of the `Point` class has two properties - `name` (`O`, `I`, `T`, `L`, or `Z`) and `rotator` (the anonymous function from above), plus a method `.pointsRotated(rotation)` that calls the `rotator` function with one of the four cardinal directions, returning the correct array of points to render.
+Each instance of the `Shape` class has two properties - `name` (`O`, `I`, `T`, `L`, or `Z`) and `rotator` (the anonymous function from above), plus a method `.pointsRotated(rotation)` that calls the `rotator` function with one of the four cardinal directions, returning the correct array of points to render.
 
 ```js
 export default class Shape {
