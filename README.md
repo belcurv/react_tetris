@@ -24,7 +24,7 @@ There are only 4; all are stateless functional components:
 
 2. `PieceView` - renders a falling `piece` (object) in a `<div>`. Each Piece consists of four `<Square>`s, defined by an array of 4 points.
 
-    ```
+    ```jsx
     const PieceView = ({ piece }) => (
       <div>
         { piece.points().map((sq, idx) => (
@@ -36,7 +36,7 @@ There are only 4; all are stateless functional components:
 
 3. `RubbleView` - renders a `<span>` containing one `<Square>` for each element in the state's `rubble` array. Each element's `row` and `col` properties are passed to `<Square>` for positioning.
 
-    ```
+    ```jsx
     const RubbleView = ({ rubble }) => (
       <span>
         { rubble.map((sq, idx) => (
@@ -48,7 +48,7 @@ There are only 4; all are stateless functional components:
 
 4. `Square` - renders a `<div>` with CSS class `square` at a specific position (`{col, row}`) on the game board using inline styles:
 
-    ```
+    ```jsx
     <div className='square' style={{
         left : `${(col - 1) * 25}px`,
         top  : `${(row - 1) * 25}px`
